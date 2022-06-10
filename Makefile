@@ -21,18 +21,19 @@ OBJ = $(SRCS:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	@$(MAKE) -s -C ./libft
+	$(MAKE) -C ./libft
 	$(CC) $(CFLAGS) $(HEADER) -o $(NAME) $(OBJ) $(INCLUDE_LIB) $(VALGRIND)
-	@echo "The $(NAME) has been build !"
+	echo "The $(NAME) has been build !"
 
 clean :
+	$(MAKE) clean -C ./libft
 	$(RM) $(OBJ)
 	$(RM) $(OBJ_BONUS)
 
 fclean : clean
-	@$(MAKE) fclean -s -C ./libft
-	@$(RM) $(NAME)
-	@echo "The $(NAME) has been deleted !"
+	$(MAKE) fclean -C ./libft
+	$(RM) $(NAME)
+	echo "The $(NAME) has been deleted !"
 
 re : fclean all
 

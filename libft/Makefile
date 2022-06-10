@@ -41,4 +41,4 @@ re :		fclean all
 %.o : %.c
 	${CC} ${CFLAGS} $(INCLUDES) -c $< -o $@
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re

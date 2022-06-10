@@ -4,7 +4,7 @@ OBJS := ${patsubst %.c, %.o, ${SRCS}}
 SRC_FOLDER := ${patsubst %.c, %.c, ${SRCS}}
 INCLUDE_FOLDER = .
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
 all :		$(NAME)
@@ -23,4 +23,4 @@ re :		fclean all
 %.o : %.c
 	${CC} ${CFLAGS} -I$(INCLUDE_FOLDER) -c $< -o $@
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re
