@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:33:09 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 17:39:17 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 18:10:05 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,32 @@ int ft_display_help_text(void)
 int ft_prompt_col(int first_player)
 {
     ft_printf("%s > ", (first_player == 0 ? CELL_CHAR_ENNEMY : CELL_CHAR_IA));
-    char str[10000];
-    ft_memset(str, 0, sizeof(char) * 10000);
+    char str[100];
+    ft_memset(str, 0, sizeof(char) * 100);
     int i = 0;
     char c;
-    while (read(STDIN_FILENO, &c, 1) == 1 && i < 8)
+    bool is_valid = false;
+    int ret;
+    while ((ret = read(STDIN_FILENO, &c, 1)) == 1)
     {
-        if (ft_isdigit(c))
+        if (ft_isdigit(c) && i < 8)
+        {
+            is_valid = (i == 0 ? true : is_valid);
             str[i++] = c;
+        }
         else if (c == '\n')
+        {
             break;
+        }
+        else
+        {
+            is_valid = false;
+        }
     }
+    if (ret <= 0)
+        return (-2);
+    if (!is_valid)
+        return (-1);
     return ft_atoi_err(str);
 }
 
@@ -77,6 +92,7 @@ int main(int argc, char **argv)
         return ft_display_help_text();
 
     int allocation_ok = ft_allocate_grid(&setup);
+    int exit = 0;
 
     if (allocation_ok == 0)
     {
@@ -93,18 +109,31 @@ int main(int argc, char **argv)
             else
             {
                 ft_display_grid(&setup, first_player, 0);
-                int column = -1;
+                int column = -2;
                 do {
-                    if (column >= 0)
+                    if (column == -1)
                         ft_printf("Column should be between %i and %i\n", 0, setup.columns - 1);
+                    else if (column >= 0)
+                        ft_printf("This column is full!\n");
                     column = ft_prompt_col(first_player);
-                } while (!(column >= 0 && column < setup.columns));
+                    if (column == -2)
+                    {
+                        exit = 1;
+                        break;
+                    }
+                } while (!(column >= 0 && column < setup.columns) || ft_is_column_fullfilled(&setup, column));
+                if (exit == 1)
+                    break;
+
                 ft_add_pawn(&setup, column, CELL_PLAYER);
             }
             round++;
         }
         ft_display_grid(&setup, first_player, ft_is_party_finished(&setup));
     }
+
+    if (exit == 1)
+        ft_printf("Oh, you gave up already? :)\n");
 
     ft_deallocate_grid(&setup);
 
