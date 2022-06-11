@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:33:09 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 12:10:57 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 15:09:56 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ int main(int argc, char **argv)
 
     if (allocation_ok == 0) {
         int round = 1; /** @todo random */
-        ft_display_grid(&setup);
         while (ft_is_party_finished(&setup) == 0)
         {
             if (round % 2 == IA)
@@ -90,6 +89,7 @@ int main(int argc, char **argv)
             }
             else
             {
+                ft_display_grid(&setup);
                 int column = -1;
                 do {
                     if (column >= 0)
@@ -98,9 +98,9 @@ int main(int argc, char **argv)
                 } while (!(column >= 0 && column < setup.columns));
                 ft_add_pawn(&setup, column, CELL_PLAYER);
             }
-            ft_display_grid(&setup);
             round++;
         }
+        ft_display_grid(&setup);
         // --------------------------------------------------------------------------------------------------------------------
         // Here should be the game!
         // --------------------------------------------------------------------------------------------------------------------

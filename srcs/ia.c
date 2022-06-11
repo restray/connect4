@@ -6,58 +6,61 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 09:29:16 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 14:23:17 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 15:31:30 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "connect4.h"
 
-/**
- * Compute the next position to play
- *
- * @return int (> 0) The number of plays to do before winning
- * @return int (<= 0) Can't win this way
- */
-static int ft_ia_backtracking(t_connect4 *setup, int *column, int player, int *player_winning, int nb_plays)
+static int ft_can_win_in_round(t_connect4 *setup, int n, int player_type)
 {
-	int res = ft_is_party_finished(setup);
-	if (res != CELL_EMPTY)
+	if (n < 0)
+		return (-1);
+	for (int col = 0; col < setup->columns; col++)
 	{
-		*player_winning = res;
-		if (res == 3)
-			return -1;
-
-		ft_display_grid(setup);
-		return nb_plays;
-	}
-
-	res = -1;
-	for (int i = 0; i < setup->columns; i++)
-	{
-		if (nb_plays == 0)
-			ft_printf("%i %i\n", i, nb_plays);
-		if (!ft_is_column_fullfilled(setup, i))
+		if (!ft_is_column_fullfilled(setup, col))
 		{
-			int line = ft_add_pawn(setup, i, player);
-			res = ft_ia_backtracking(setup, column, ((player == CELL_IA) ? CELL_PLAYER : CELL_IA), player_winning, nb_plays + 1);
-			setup->grid[line][i] = CELL_EMPTY;
-			if (*player_winning == CELL_IA && res > 0)
-				*column = i;
+			int line = ft_add_pawn(setup, col, player_type);
+			if (ft_is_party_finished(setup))
+			{
+				setup->grid[line][col] = CELL_EMPTY;
+				return col;
+			}
+			int res = ft_can_win_in_round(setup, n - 1, player_type);
+			setup->grid[line][col] = CELL_EMPTY;
+			if (res >= 0)
+				return res;
 		}
 	}
-	// ft_display_grid(setup);
-	return res;
+	return -1;
+}
+
+int ft_ia_compute(t_connect4 *setup)
+{
+	int column;
+
+	column = ft_can_win_in_round(setup, 1, CELL_IA);
+	if (column >= 0)
+		return column;
+
+	column = ft_can_win_in_round(setup, 1, CELL_PLAYER);
+	if (column >= 0)
+		return column;
+
+	column = ft_can_win_in_round(setup, 4, CELL_IA);
+	if (column >= 0)
+		return column;
+		
+	return setup->columns / 2;
 }
 
 int ft_ia_play(t_connect4 *setup)
 {
-	int column = -1, winner = CELL_EMPTY, nb_plays = 1;
+	int column = -1;
 
 	if (!ft_is_grid_empty(setup))
-		nb_plays = ft_ia_backtracking(setup, &column, CELL_IA, &winner, 0);
+		column = ft_ia_compute(setup);
 	else
 		column = setup->columns / 2;
-
-	ft_printf("Nb de coups pour gagner %i, %i\n", nb_plays, column);
 	return column;
 }
