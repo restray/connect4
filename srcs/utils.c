@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 22:15:41 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 23:00:56 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 23:18:42 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,12 @@ bool ft_is_grid_filled(t_connect4 *setup)
             return false;
     }
     return true;
+}
+
+int ft_get_size_nb(int nb)
+{
+    int i = 1;
+    while (nb /= 10)
+        i++;
+    return i;
 }

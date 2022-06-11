@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 22:04:42 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 17:34:21 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 23:24:41 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,18 @@ static void ft_get_color_winner(int round, int winner)
 void    ft_display_grid(t_connect4 *setup, int round, int winner)
 {
 	ft_printf("%s", CLEAR);
+
+	int nb_col_size = ft_get_size_nb(setup->columns);
+	if (nb_col_size < 3)
+		nb_col_size = 3;
+
 	// ///////////////////
 	ft_get_color_winner(round, winner);
-	for (int y = 0; y < (setup->columns * 2) + 2; y++)
+	for (int y = 0; y < (setup->columns * nb_col_size) + 2; y++)
 	{
 		if (y == 0)
 			ft_printf("%s", GRID_TOP_LEFT);
-		else if (y == (setup->columns * 2) + 1)
+		else if (y == (setup->columns * 3) + 1)
 			ft_printf("%s", GRID_TOP_RIGHT);
 		else
 			ft_printf("%s", GRID_TOP_BOTTOM);
@@ -94,6 +99,9 @@ void    ft_display_grid(t_connect4 *setup, int round, int winner)
 				ft_printf("%s", ((round == 0) ? CELL_CHAR_ENNEMY : CELL_CHAR_IA));
 			else
 				ft_printf("Gone wrong... %i\n", setup->grid[i][y]);
+			for (int nb_spaces = 0; nb_spaces < nb_col_size - 2; nb_spaces++) {
+				ft_putchar(' ');
+			}
 		}
 		// ///////////////////
 		NOCOLOUR();
@@ -104,15 +112,27 @@ void    ft_display_grid(t_connect4 *setup, int round, int winner)
 	ft_putchar('\n');
 	ft_get_color_winner(round, winner);
 	// ///////////////////
-	for (int y = 0; y < (setup->columns * 2) + 2; y++)
+	for (int y = 0; y < (setup->columns * 3) + 2; y++)
 	{		
 		if (y == 0)
-			ft_printf(GRID_BOTTOM_LEFT);
-		else if (y == (setup->columns * 2) + 1)
-			ft_printf(GRID_BOTTOM_RIGHT);
+			ft_printf("%s", GRID_BOTTOM_LEFT);
+		else if (y == (setup->columns * 3) + 1)
+			ft_printf("%s", GRID_BOTTOM_RIGHT);
 		else
-			ft_printf(GRID_TOP_BOTTOM);
+			ft_printf("%s", GRID_TOP_BOTTOM);
 	}
 	NOCOLOUR();
+
+	ft_putchar('\n');
+	ft_printf(" ");
+	for (int y = 0; y < setup->columns; y++)
+	{
+		ft_printf("%i", y);
+		for (int nb_spaces = 0; nb_spaces < nb_col_size - ft_get_size_nb(y); nb_spaces++)
+		{
+			ft_putchar(' ');
+		}
+	}
+	
 	ft_printf("\n\n");
 }

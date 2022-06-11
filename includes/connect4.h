@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:35:31 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 22:51:27 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 23:19:01 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct	s_connect4 {
 	int**       grid;
 }               t_connect4;
 
+int		ft_get_size_nb(int nb);
 void    *ft_free(void *addr);
 int     ft_allocate_grid(t_connect4 *setup);
 void    ft_deallocate_grid(t_connect4 *setup);
