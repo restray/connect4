@@ -8,7 +8,7 @@ LIB_FLAGS		= -L./libft
 RM	=	rm -rf
 
 INC			=	-Iincludes/ -Ilibft/includes/ -Ilibft/libft/
-INCLUDE_LIB		= ./libft/libftprintf.a
+LIBFT		= ./libft/libftprintf.a
 DEBUG 		= -O0 -g3
 
 SRCS = 	connect4.c \
@@ -24,26 +24,32 @@ $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 		@mkdir -p $(dir $@)
 		${CC} $(INC) ${CFLAGS} -c $< -o $@ $(DEBUG)
 
-all : $(NAME)
+all: $(NAME)
 
-$(NAME) : $(OBJS) $(INCLUDE_LIB)
-	$(CC) $(CFLAGS) $(INC) -o $(NAME) $(OBJS) $(INCLUDE_LIB) $(DEBUG)
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(INC) -o $(NAME) $(OBJS) $(LIBFT) $(DEBUG)
 	echo "The $(NAME) has been build !"
 
-$(INCLUDE_LIB):
+$(LIBFT):
 	$(MAKE) -C ./libft
 
-clean :
+clean:
 	$(MAKE) clean -C ./libft
 	$(RM) $(OBJS_PATH)
 
-fclean : clean
+fclean: clean
 	$(MAKE) fclean -C ./libft
 	$(RM) $(NAME)
 	echo "The $(NAME) has been deleted !"
 
-re : fclean 
+re: fclean 
 	$(MAKE) all
 
+test: $(NAME)
+	./connect4 6 7
+
+staf: $(LIBFT)
+	$(CC) -Wall -Wextra $(INC) srcs/get_first_player.c $(LIBFT) && ./a.out
+
 -include $(DEPS)
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re staf test
