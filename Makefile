@@ -14,9 +14,9 @@ DEBUG 		= -O0 -g3
 SRCS = 	connect4.c \
 		grid.c \
 		ia.c \
-		win_cond.c\
-		utils.c \
-		get_first_player.c
+		input.c \
+		win_cond.c \
+		utils.c
 
 OBJS = $(addprefix $(OBJS_PATH), $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)

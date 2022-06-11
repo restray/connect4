@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:25:43 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 18:52:22 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 23:00:26 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,6 @@ bool ft_is_column_fullfilled(t_connect4 *setup, int column)
     if (setup->grid[setup->lines - 1][column] != CELL_EMPTY)
         return true;
     return false;
-}
-
-bool ft_is_grid_empty(t_connect4 *setup)
-{
-    for (int i = 0; i < setup->columns; i++)
-    {
-        if (setup->grid[0][i] != CELL_EMPTY)
-            return false;
-    }
-    return true;
-}
-
-bool ft_is_grid_filled(t_connect4 *setup)
-{
-    for (int i = 0; i < setup->columns; i++)
-    {
-        if (setup->grid[setup->lines - 1][i] == CELL_EMPTY)
-            return false;
-    }
-    return true;
 }
 
 static int ft_is_4_in_matrix(t_connect4 *setup, int line, int column, int i_incr, int y_incr)

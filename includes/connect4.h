@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:35:31 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 17:31:15 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 22:51:27 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@
 #define IA 0
 #define PLAYER 1
 
-    typedef struct s_connect4 {
-    int         lines;
-    int         columns;
-    int**       grid;
+typedef struct	s_connect4 {
+	int         lines;
+	int         columns;
+	int**       grid;
 }               t_connect4;
 
 void    *ft_free(void *addr);
@@ -62,5 +62,7 @@ int     ft_is_party_finished(t_connect4 *setup);
 int     ft_add_pawn(t_connect4 *setup, int column, int player_type);
 bool    ft_is_grid_empty(t_connect4 *setup);
 bool    ft_is_grid_filled(t_connect4 *setup);
+int		ft_atoi_err(char *str);
+int		ft_prompt_col(int first_player);
 
 #endif
