@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:33:09 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 18:10:05 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 19:51:49 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int main(int argc, char **argv)
     if (allocation_ok == 0)
     {
         srand(time(0));
-        int round = ft_get_first_player(); /** @todo random */
+        int round = ft_get_first_player();
         int first_player = round;
         while (ft_is_party_finished(&setup) == 0)
         {
@@ -129,7 +129,12 @@ int main(int argc, char **argv)
             }
             round++;
         }
-        ft_display_grid(&setup, first_player, ft_is_party_finished(&setup));
+        int winner = ft_is_party_finished(&setup);
+        ft_display_grid(&setup, first_player, winner);
+        if (winner == CELL_IA)
+            ft_printf("IA won\n");
+        else if (winner == CELL_PLAYER)
+            ft_printf("Player won\n");
     }
 
     if (exit == 1)
