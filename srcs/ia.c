@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 09:29:16 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 10:39:47 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 10:54:58 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,13 @@ static int  ft_add_pawn(t_connect4 *setup, int column, int player_type)
 static int ft_ia_backtracking(t_connect4 *setup, int *column, int player, int *player_winning, int nb_plays)
 {
     int res = ft_is_party_finished(setup);
-    if (res != CELL_EMPTY || nb_plays < 50)
+    if (res != CELL_EMPTY || nb_plays > 50)
     {
         *player_winning = res;
         return nb_plays;
     }
+
+    ft_display_grid(setup);
 
     res = -1;
     for (int i = 0; i < setup->columns; i++)
@@ -128,10 +130,11 @@ static int ft_ia_backtracking(t_connect4 *setup, int *column, int player, int *p
         if (!ft_is_column_fullfilled(setup, i))
         {
             int line = ft_add_pawn(setup, i, player);
-            tmp_res = ft_ia_backtracking(setup, i, (player + 1 % 2) + CELL_FRIEND, player_winning, nb_plays + 1);
+            int col = 0;
+            tmp_res = ft_ia_backtracking(setup, &col, ((player == CELL_FRIEND) ? CELL_ENNEMY : CELL_FRIEND), player_winning, nb_plays + 1);
             if (tmp_res < res) {
                 res = tmp_res;
-                *column = i;
+                *column = col;
             }
             setup->grid[line][i] = CELL_EMPTY;
         }
@@ -139,8 +142,12 @@ static int ft_ia_backtracking(t_connect4 *setup, int *column, int player, int *p
     return res;
 }
 
-void ft_ia_play(t_connect4 *setup)
+int ft_ia_play(t_connect4 *setup)
 {
     int column = -1, winner = CELL_EMPTY;
-    printf("Nb de coups pour gagner %i\n", ft_ia_backtracking(setup, &column, CELL_CHAR_FRIEND, &winner, 0));
+
+    int nb_plays = ft_ia_backtracking(setup, &column, CELL_FRIEND, &winner, 0);
+
+    ft_printf("Nb de coups pour gagner %i, %i\n", nb_plays, column);
+    return column;
 }

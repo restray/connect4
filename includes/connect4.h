@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:35:31 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 10:39:56 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 10:49:04 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ void    *ft_free(void *addr);
 int     ft_allocate_grid(t_connect4 *setup);
 void    ft_deallocate_grid(t_connect4 *setup);
 void    ft_display_grid(t_connect4 *setup);
-void    ft_ia_play(t_connect4 *setup);
+int     ft_ia_play(t_connect4 *setup);
 
 #endif
