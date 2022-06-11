@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 22:04:42 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 17:22:43 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 17:34:21 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,41 +48,44 @@ void    ft_deallocate_grid(t_connect4 *setup)
 
 static void ft_get_color_winner(int round, int winner)
 {
+	NOCOLOUR();
 	ft_printf("%s", GREY);
 	if (winner == 2)
 		ft_printf("%s", ((round == 0) ? YELLOW : RED));
 	if (winner == 1)
-		ft_printf("%s", ((round == 0) ? RED : YELLOW));
+		ft_printf("%s", ((round == 1) ? RED : YELLOW));
 }
 
 void    ft_display_grid(t_connect4 *setup, int round, int winner)
 {
 	ft_printf("%s", CLEAR);
 	// ///////////////////
-	ft_get_color_winner(winner, round);
+	ft_get_color_winner(round, winner);
 	for (int y = 0; y < (setup->columns * 2) + 2; y++)
 	{
 		if (y == 0)
-			ft_printf(GRID_TOP_LEFT);
+			ft_printf("%s", GRID_TOP_LEFT);
 		else if (y == (setup->columns * 2) + 1)
-			ft_printf(GRID_TOP_RIGHT);
+			ft_printf("%s", GRID_TOP_RIGHT);
 		else
-			ft_printf(GRID_TOP_BOTTOM);
+			ft_printf("%s", GRID_TOP_BOTTOM);
 	}
-	ft_printf("%s", NOCOLOUR);
+	NOCOLOUR();
 	for (int i = setup->lines - 1; i >= 0; i--)
 	{
 		int bg_i = i % 2;
-		ft_printf("%s", NOCOLOUR);
+		NOCOLOUR();
 		ft_putchar('\n');
 		// ///////////////////
-		ft_printf("%s%s%s", ((round == 0) ? YELLOW : RED), GRID_LEFT_RIGHT, NOCOLOUR);
+		ft_get_color_winner(round, winner);
+		ft_printf("%s", GRID_LEFT_RIGHT);
+		NOCOLOUR();
 		for (int y = 0; y < setup->columns; y++)
 		{
 			if (bg_i++ % 2 == 0)
 				ft_printf("%s", B_GREY);
 			else
-				ft_printf("%s", NOCOLOUR);
+				NOCOLOUR();
 			if (setup->grid[i][y] == CELL_EMPTY)
 				ft_printf("%s", CELL_CHAR_EMPTY);
 			else if (setup->grid[i][y] == CELL_IA)
@@ -93,10 +96,13 @@ void    ft_display_grid(t_connect4 *setup, int round, int winner)
 				ft_printf("Gone wrong... %i\n", setup->grid[i][y]);
 		}
 		// ///////////////////
-		ft_printf("%s%s%s%s", NOCOLOUR, ((round == 0) ? YELLOW : RED), GRID_LEFT_RIGHT, NOCOLOUR);
+		NOCOLOUR();
+		ft_get_color_winner(round, winner);
+		ft_printf("%s", GRID_LEFT_RIGHT);
+		NOCOLOUR();
 	}
 	ft_putchar('\n');
-	ft_get_color_winner(winner, round);
+	ft_get_color_winner(round, winner);
 	// ///////////////////
 	for (int y = 0; y < (setup->columns * 2) + 2; y++)
 	{		
@@ -107,6 +113,6 @@ void    ft_display_grid(t_connect4 *setup, int round, int winner)
 		else
 			ft_printf(GRID_TOP_BOTTOM);
 	}
-	ft_printf("%s", NOCOLOUR);
+	NOCOLOUR();
 	ft_printf("\n\n");
 }

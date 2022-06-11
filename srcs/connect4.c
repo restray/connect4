@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:33:09 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 16:49:34 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 17:39:17 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int ft_display_help_text(void)
     return (1);
 }
 
-int ft_prompt_col()
+int ft_prompt_col(int first_player)
 {
-    ft_printf("> ");
+    ft_printf("%s > ", (first_player == 0 ? CELL_CHAR_ENNEMY : CELL_CHAR_IA));
     char str[10000];
     ft_memset(str, 0, sizeof(char) * 10000);
     int i = 0;
@@ -92,14 +92,12 @@ int main(int argc, char **argv)
             }
             else
             {
-                // int column = ft_ia_play(&setup);
-                // ft_add_pawn(&setup, column, CELL_PLAYER);
                 ft_display_grid(&setup, first_player, 0);
                 int column = -1;
                 do {
                     if (column >= 0)
                         ft_printf("Column should be between %i and %i\n", 0, setup.columns - 1);
-                    column = ft_prompt_col();
+                    column = ft_prompt_col(first_player);
                 } while (!(column >= 0 && column < setup.columns));
                 ft_add_pawn(&setup, column, CELL_PLAYER);
             }

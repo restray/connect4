@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 11:25:43 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 11:46:20 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 17:37:46 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ int ft_is_party_finished(t_connect4 *setup)
 {
     if (ft_is_grid_filled(setup))
         return 3;
-    for (int i = 0; i < setup->lines - 3; i++)
+    for (int i = 0; i < setup->lines; i++)
     {
-        for (int y = 0; y < setup->columns - 3; y++)
+        for (int y = 0; y < setup->columns; y++)
         {
             if (setup->grid[i][y] != CELL_EMPTY)
             {

@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:35:31 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 16:47:49 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 17:31:15 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,23 @@
 # define CELL_IA 1
 # define CELL_EMPTY 0
 
-
-# define B_GRID_TOP_BOTTOM "\33[0;100m"
-# define B_GRID_LEFT_RIGHT "\33[0;100m"
 # define GRID_TOP_BOTTOM "━"
 # define GRID_LEFT_RIGHT "┃"
 # define GRID_TOP_LEFT "┏"
 # define GRID_TOP_RIGHT "┓"
 # define GRID_BOTTOM_LEFT "┗"
 # define GRID_BOTTOM_RIGHT "┛"
+
 # define B_GREY "\33[0;100m"
 # define RED "\33[1;31m"
 # define YELLOW "\33[1;33m"
 # define GREY "\33[1;90m"
-# define NOCOLOUR "\33[m"
 # define CLEAR "\033[1;1H\033[2J"
 # define CELL_CHAR_ENNEMY "🔴"
 # define CELL_CHAR_IA "🟡"
 # define CELL_CHAR_EMPTY "  "
+
+# define NOCOLOUR() (ft_printf("\33[m"))
 
 #define IA 0
 #define PLAYER 1
