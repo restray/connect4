@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 22:04:42 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 10:46:42 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 12:10:30 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void    ft_display_grid(t_connect4 *setup)
             ft_putchar(' ');
             if (setup->grid[i][y] == CELL_EMPTY)
                 ft_putchar(CELL_CHAR_EMPTY);
-            else if (setup->grid[i][y] == CELL_FRIEND)
-                ft_putchar(CELL_CHAR_FRIEND);
-            else if (setup->grid[i][y] == CELL_ENNEMY)
+            else if (setup->grid[i][y] == CELL_IA)
+                ft_putchar(CELL_CHAR_IA);
+            else if (setup->grid[i][y] == CELL_PLAYER)
                 ft_putchar(CELL_CHAR_ENNEMY);
             else
                 ft_printf("Gone wrong... %i\n", setup->grid[i][y]);

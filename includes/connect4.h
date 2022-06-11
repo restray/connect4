@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:35:31 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 10:49:04 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 12:10:30 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@
 # include <stdbool.h>
 # include "ft_printf.h"
 
-# define CELL_ENNEMY 2
-# define CELL_FRIEND 1
+# define CELL_PLAYER 2
+# define CELL_IA 1
 # define CELL_EMPTY 0
 
 # define CELL_CHAR_ENNEMY 'x'
-# define CELL_CHAR_FRIEND 'o'
+# define CELL_CHAR_IA 'o'
 # define CELL_CHAR_EMPTY ' '
+
+#define IA 0
+#define PLAYER 1
 
 typedef struct  s_connect4 {
     int         lines;
@@ -36,5 +39,10 @@ int     ft_allocate_grid(t_connect4 *setup);
 void    ft_deallocate_grid(t_connect4 *setup);
 void    ft_display_grid(t_connect4 *setup);
 int     ft_ia_play(t_connect4 *setup);
+bool    ft_is_column_fullfilled(t_connect4 *setup, int column);
+int     ft_is_party_finished(t_connect4 *setup);
+int     ft_add_pawn(t_connect4 *setup, int column, int player_type);
+bool    ft_is_grid_empty(t_connect4 *setup);
+bool    ft_is_grid_filled(t_connect4 *setup);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:33:09 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 10:48:41 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 12:10:57 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,23 @@ int ft_display_help_text(void)
     return (1);
 }
 
+int ft_prompt_col()
+{
+    ft_printf("> ");
+    char str[10000];
+    ft_memset(str, 0, sizeof(char) * 10000);
+    int i = 0;
+    char c;
+    while (read(STDIN_FILENO, &c, 1) == 1 && i < 8)
+    {
+        if (ft_isdigit(c))
+            str[i++] = c;
+        else if (c == '\n')
+            break;
+    }
+    return ft_atoi_err(str);
+}
+
 int main(int argc, char **argv)
 {
     t_connect4 setup;
@@ -62,8 +79,28 @@ int main(int argc, char **argv)
     int allocation_ok = ft_allocate_grid(&setup);
 
     if (allocation_ok == 0) {
-        ft_ia_play(&setup);
+        int round = 1; /** @todo random */
         ft_display_grid(&setup);
+        while (ft_is_party_finished(&setup) == 0)
+        {
+            if (round % 2 == IA)
+            {
+                int column = ft_ia_play(&setup);
+                ft_add_pawn(&setup, column, CELL_IA);
+            }
+            else
+            {
+                int column = -1;
+                do {
+                    if (column >= 0)
+                        ft_printf("Column should be between %i and %i\n", 0, setup.columns - 1);
+                    column = ft_prompt_col();
+                } while (!(column >= 0 && column < setup.columns));
+                ft_add_pawn(&setup, column, CELL_PLAYER);
+            }
+            ft_display_grid(&setup);
+            round++;
+        }
         // --------------------------------------------------------------------------------------------------------------------
         // Here should be the game!
         // --------------------------------------------------------------------------------------------------------------------
