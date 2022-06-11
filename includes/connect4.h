@@ -6,7 +6,11 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:35:31 by tbelhomm          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/06/11 10:50:43 by aweaver          ###   ########.fr       */
+=======
+/*   Updated: 2022/06/11 10:49:04 by tbelhomm         ###   ########.fr       */
+>>>>>>> ia
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +21,7 @@
 # define CONNECT4_H
 # define MIN_LINES 6
 # define MIN_COLUMNS 7
+# include <stdbool.h>
 # include "ft_printf.h"
 
 # define CELL_ENNEMY 2
@@ -38,5 +43,6 @@ int     ft_allocate_grid(t_connect4 *setup);
 void    ft_deallocate_grid(t_connect4 *setup);
 void    ft_display_grid(t_connect4 *setup);
 int		ft_get_first_player(void);
+int     ft_ia_play(t_connect4 *setup);
 
 #endif

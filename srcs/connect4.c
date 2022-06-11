@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:33:09 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/10 22:20:57 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 10:48:41 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int main(int argc, char **argv)
     int allocation_ok = ft_allocate_grid(&setup);
 
     if (allocation_ok == 0) {
+        ft_ia_play(&setup);
         ft_display_grid(&setup);
         // --------------------------------------------------------------------------------------------------------------------
         // Here should be the game!

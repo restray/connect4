@@ -13,6 +13,7 @@ DEBUG 		= -O0 -g3
 
 SRCS = 	connect4.c \
 		grid.c \
+		ia.c \
 		utils.c
 
 OBJS = $(addprefix $(OBJS_PATH), $(SRCS:.c=.o))
