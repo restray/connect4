@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 22:04:42 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/10 22:40:48 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 10:46:42 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void    ft_deallocate_grid(t_connect4 *setup)
 
 void    ft_display_grid(t_connect4 *setup)
 {
-    for (int i = 0; i < setup->lines; i++)
+    for (int i = setup->lines - 1; i >= 0; i--)
     {
         ft_putchar('-');
         for (int y = 0; y < (setup->columns * 4); y++)

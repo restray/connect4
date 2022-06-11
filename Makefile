@@ -11,7 +11,7 @@ HEADER			=	-Iincludes/ -Ilibft/includes/ -Ilibft/libft/
 INCLUDE_LIB		= ./libft/libftprintf.a
 VALGRIND 		= -O0 -g
 
-SRCS = srcs/connect4.c srcs/grid.c srcs/utils.c
+SRCS = srcs/connect4.c srcs/grid.c srcs/utils.c srcs/ia.c
 
 OBJ = $(SRCS:.c=.o)
 
