@@ -6,17 +6,17 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 09:29:16 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 18:58:09 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 19:46:13 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "connect4.h"
 
-static int ft_can_win_in_round(t_connect4 *setup, int n, int player_type)
+static int ft_can_win_in_round(t_connect4 *setup, int n, int player_type, int start_pos)
 {
-	if (n < 0)
+	if (n <= 0)
 		return (-1);
-	for (int col = 0; col < setup->columns; col++)
+	for (int col = start_pos; col < setup->columns; col++)
 	{
 		if (!ft_is_column_fullfilled(setup, col))
 		{
@@ -26,7 +26,7 @@ static int ft_can_win_in_round(t_connect4 *setup, int n, int player_type)
 				setup->grid[line][col] = CELL_EMPTY;
 				return col;
 			}
-			int res = ft_can_win_in_round(setup, n - 1, player_type);
+			int res = ft_can_win_in_round(setup, n - 1, player_type, 0);
 			setup->grid[line][col] = CELL_EMPTY;
 			if (res >= 0)
 				return res;
@@ -40,15 +40,30 @@ int ft_ia_compute(t_connect4 *setup)
 	int column;
 
 	for (int i = 1; i <= 3; i++) {
-		column = ft_can_win_in_round(setup, i, CELL_IA);
+		column = ft_can_win_in_round(setup, i, CELL_IA, 0);
+		if (column >= 0)
+		{
+			if (i == 1)
+			{
+				return column;
+			}
+			else
+			{
+				int line = ft_add_pawn(setup, column, CELL_IA);
+				int column_player = ft_can_win_in_round(setup, 1, CELL_PLAYER, 0);
+				while (column_player >= 0) {
+					column_player = ft_can_win_in_round(setup, 1, CELL_IA, column_player + 1);
+					if (column_player == setup->columns)
+						return column_player;
+				}
+				setup->grid[line][column] = CELL_EMPTY;
+				return column;
+			}
+		}
+
+		column = ft_can_win_in_round(setup, 1, CELL_PLAYER, 0);
 		if (column >= 0)
 			return column;
-
-		if (i == 1) {
-			column = ft_can_win_in_round(setup, i, CELL_PLAYER);
-			if (column >= 0)
-				return column;
-		}
 	}
 
 	return rand() % setup->columns;
