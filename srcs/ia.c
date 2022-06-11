@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 09:29:16 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 16:02:36 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 18:58:09 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@ int ft_ia_compute(t_connect4 *setup)
 {
 	int column;
 
-	for (int i = 1; i <= 4; i++) {
+	for (int i = 1; i <= 3; i++) {
 		column = ft_can_win_in_round(setup, i, CELL_IA);
 		if (column >= 0)
 			return column;
 
-		column = ft_can_win_in_round(setup, i, CELL_PLAYER);
-		if (column >= 0)
-			return column;
+		if (i == 1) {
+			column = ft_can_win_in_round(setup, i, CELL_PLAYER);
+			if (column >= 0)
+				return column;
+		}
 	}
 
 	return rand() % setup->columns;
