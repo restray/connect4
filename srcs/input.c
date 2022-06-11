@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 09:38:08 by aweaver           #+#    #+#             */
-/*   Updated: 2022/06/11 23:34:53 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 23:41:16 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,14 @@ int ft_atoi_err(char *str)
 
 int ft_prompt_col(int first_player)
 {
-    ft_printf("%s > ", (first_player == 0 ? CELL_CHAR_ENNEMY : CELL_CHAR_IA));
-    char str[100];
-    ft_memset(str, 0, sizeof(char) * 100);
     int i = 0;
     char c;
     bool is_valid = false;
     int ret;
+    char str[100];
+
+    ft_memset(str, 0, sizeof(char) * 100);
+    ft_printf("%s > ", (first_player == 0 ? CELL_CHAR_ENNEMY : CELL_CHAR_IA));
     while ((ret = read(STDIN_FILENO, &c, 1)) == 1)
     {
         if (ft_isdigit(c) && i < 8)
@@ -53,13 +54,9 @@ int ft_prompt_col(int first_player)
             str[i] = c;
         }
         else if (c == '\n')
-        {
             break;
-        }
         else
-        {
             is_valid = false;
-        }
         i++;
     }
     if (ret <= 0)

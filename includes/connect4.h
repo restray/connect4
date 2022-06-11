@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:35:31 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 23:19:01 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 23:45:51 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 typedef struct	s_connect4 {
 	int         lines;
 	int         columns;
+	int			first_player; /* PLAYER = 1 ; IA = 0 */
 	int**       grid;
 }               t_connect4;
 
@@ -55,7 +56,7 @@ int		ft_get_size_nb(int nb);
 void    *ft_free(void *addr);
 int     ft_allocate_grid(t_connect4 *setup);
 void    ft_deallocate_grid(t_connect4 *setup);
-void    ft_display_grid(t_connect4 *setup, int round, int winner);
+void    ft_display_grid(t_connect4 *setup, int winner);
 int		ft_get_first_player(void);
 int     ft_ia_play(t_connect4 *setup);
 bool    ft_is_column_fullfilled(t_connect4 *setup, int column);

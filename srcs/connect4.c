@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:33:09 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 23:36:02 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 23:47:40 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int ft_display_help_text(void)
 int main(int argc, char **argv)
 {
     t_connect4 setup;
+    int exit = 0;
 
     if (argc != 3)
         return ft_display_help_text();
@@ -35,31 +36,24 @@ int main(int argc, char **argv)
     if (!(setup.lines >= MIN_LINES && setup.columns >= MIN_COLUMNS))
         return ft_display_help_text();
 
-    int allocation_ok = ft_allocate_grid(&setup);
-    int exit = 0;
-
-    if (allocation_ok == 0)
+    if (ft_allocate_grid(&setup))
     {
         srand(time(0));
-        int round = ft_get_first_player();
-        int first_player = round;
-        while (ft_is_party_finished(&setup) == 0)
+        int round = setup.first_player = ft_get_first_player();
+        while (!ft_is_party_finished(&setup))
         {
             if (round % 2 == IA)
-            {
-                int column = ft_ia_play(&setup);
-                ft_add_pawn(&setup, column, CELL_IA);
-            }
+                ft_add_pawn(&setup, ft_ia_play(&setup), CELL_IA);
             else
             {
-                ft_display_grid(&setup, first_player, 0);
+                ft_display_grid(&setup, 0);
                 int column = -2;
                 do {
                     if (column == -1 || column >= setup.columns)
                         ft_printf("Column should be between %i and %i\n", 0, setup.columns - 1);
                     else if (column >= 0)
                         ft_printf("This column is full!\n");
-                    column = ft_prompt_col(first_player);
+                    column = ft_prompt_col(setup.first_player);
                     if (column == -2)
                     {
                         exit = 1;
@@ -74,7 +68,7 @@ int main(int argc, char **argv)
             round++;
         }
         int winner = ft_is_party_finished(&setup);
-        ft_display_grid(&setup, first_player, winner);
+        ft_display_grid(&setup, winner);
         if (winner == CELL_IA)
             ft_printf("IA won\n");
         else if (winner == CELL_PLAYER)
