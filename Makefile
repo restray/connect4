@@ -15,7 +15,8 @@ SRCS = 	connect4.c \
 		grid.c \
 		ia.c \
 		win_cond.c\
-		utils.c
+		utils.c \
+		get_first_player.c
 
 OBJS = $(addprefix $(OBJS_PATH), $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)

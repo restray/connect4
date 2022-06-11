@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:33:09 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 15:09:56 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 16:49:34 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,11 @@ int main(int argc, char **argv)
 
     int allocation_ok = ft_allocate_grid(&setup);
 
-    if (allocation_ok == 0) {
-        int round = 1; /** @todo random */
+    if (allocation_ok == 0)
+    {
+        srand(time(0));
+        int round = ft_get_first_player(); /** @todo random */
+        int first_player = round;
         while (ft_is_party_finished(&setup) == 0)
         {
             if (round % 2 == IA)
@@ -89,7 +92,9 @@ int main(int argc, char **argv)
             }
             else
             {
-                ft_display_grid(&setup);
+                // int column = ft_ia_play(&setup);
+                // ft_add_pawn(&setup, column, CELL_PLAYER);
+                ft_display_grid(&setup, first_player, 0);
                 int column = -1;
                 do {
                     if (column >= 0)
@@ -100,10 +105,7 @@ int main(int argc, char **argv)
             }
             round++;
         }
-        ft_display_grid(&setup);
-        // --------------------------------------------------------------------------------------------------------------------
-        // Here should be the game!
-        // --------------------------------------------------------------------------------------------------------------------
+        ft_display_grid(&setup, first_player, ft_is_party_finished(&setup));
     }
 
     ft_deallocate_grid(&setup);
