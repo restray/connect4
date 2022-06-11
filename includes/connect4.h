@@ -6,9 +6,12 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:35:31 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/10 22:35:52 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 10:50:43 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
+#include <time.h>
 
 #ifndef CONNECT4_H
 # define CONNECT4_H
@@ -34,5 +37,6 @@ void    *ft_free(void *addr);
 int     ft_allocate_grid(t_connect4 *setup);
 void    ft_deallocate_grid(t_connect4 *setup);
 void    ft_display_grid(t_connect4 *setup);
+int		ft_get_first_player(void);
 
 #endif
