@@ -1,7 +1,7 @@
 NAME = connect4
 
 CC	=	cc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	=  -MMD -Wall -Wextra -Werror
 
 LIB_FLAGS		= -L./libft
 
@@ -13,22 +13,22 @@ VALGRIND 		= -O0 -g
 
 SRCS = srcs/connect4.c srcs/grid.c srcs/utils.c
 
-OBJ = $(SRCS:.c=.o)
+OBJS = $(SRCS:.c=.o)
+DEPS = $(OBJS:.o=.d)
 
 %.o: %.c
 		${CC} $(HEADER) ${CFLAGS} -c $< -o $@ $(VALGRIND)
 
 all : $(NAME)
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJS)
 	$(MAKE) -C ./libft
-	$(CC) $(CFLAGS) $(HEADER) -o $(NAME) $(OBJ) $(INCLUDE_LIB) $(VALGRIND)
+	$(CC) $(CFLAGS) $(HEADER) -o $(NAME) $(OBJS) $(INCLUDE_LIB) $(VALGRIND)
 	echo "The $(NAME) has been build !"
 
 clean :
 	$(MAKE) clean -C ./libft
-	$(RM) $(OBJ)
-	$(RM) $(OBJ_BONUS)
+	$(RM) $(OBJS)
 
 fclean : clean
 	$(MAKE) fclean -C ./libft
@@ -37,4 +37,5 @@ fclean : clean
 
 re : fclean all
 
+-include $(DEPS)
 .PHONY: all clean fclean re
