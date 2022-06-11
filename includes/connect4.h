@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:35:31 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 13:43:04 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/06/11 14:46:09 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@
 # define RED "\33[1;31m"
 # define YELLOW "\33[1;33m"
 # define NOCOLOUR "\33[m"
-# define CELL_CHAR_ENNEMY 'o'
-# define CELL_CHAR_IA 'o'
+# define CLEAR "\033[1;1H\033[2J"
+# define CELL_CHAR_ENNEMY "※"
+# define CELL_CHAR_IA "⁜"
 # define CELL_CHAR_EMPTY ' '
 
 #define IA 0

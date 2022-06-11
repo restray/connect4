@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 22:04:42 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 13:59:39 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/06/11 14:57:01 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void    ft_deallocate_grid(t_connect4 *setup)
 
 void    ft_display_grid(t_connect4 *setup)
 {
+	ft_printf("%s", CLEAR);
     for (int i = setup->lines - 1; i >= 0; i--)
     {
         ft_putchar('-');
@@ -61,9 +62,9 @@ void    ft_display_grid(t_connect4 *setup)
             if (setup->grid[i][y] == CELL_EMPTY)
                 ft_putchar(CELL_CHAR_EMPTY);
             else if (setup->grid[i][y] == CELL_IA)
-                ft_printf("%s%c%s", YELLOW, CELL_CHAR_IA, NOCOLOUR);
+                ft_printf("%s%s%s", YELLOW, CELL_CHAR_IA, NOCOLOUR);
             else if (setup->grid[i][y] == CELL_PLAYER)
-                ft_printf("%s%c%s", RED, CELL_CHAR_ENNEMY, NOCOLOUR);
+                ft_printf("%s%s%s", RED, CELL_CHAR_ENNEMY, NOCOLOUR);
             else
                 ft_printf("Gone wrong... %i\n", setup->grid[i][y]);
             ft_putchar(' ');
