@@ -76,5 +76,10 @@ void    ft_display_grid(t_connect4 *setup)
     ft_putchar('-');
     for (int y = 0; y < (setup->columns * 4); y++)
         ft_putchar('-');
+	ft_putchar('\n');
+    for (int y = 0; y < (setup->columns * 4); y++)
+	{
+		if (y % 2 = 0)
+	}
     ft_putchar('\n');
 }
