@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 09:38:08 by aweaver           #+#    #+#             */
-/*   Updated: 2022/06/11 22:49:36 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 23:34:53 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int ft_prompt_col(int first_player)
         if (ft_isdigit(c) && i < 8)
         {
             is_valid = (i == 0 ? true : is_valid);
-            str[i++] = c;
+            str[i] = c;
         }
         else if (c == '\n')
         {
@@ -60,6 +60,7 @@ int ft_prompt_col(int first_player)
         {
             is_valid = false;
         }
+        i++;
     }
     if (ret <= 0)
         return (-2);

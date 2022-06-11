@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 22:04:42 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 23:24:41 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 23:36:07 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +127,16 @@ void    ft_display_grid(t_connect4 *setup, int round, int winner)
 	ft_printf(" ");
 	for (int y = 0; y < setup->columns; y++)
 	{
+		for (int nb_spaces = 0; nb_spaces < (nb_col_size - ft_get_size_nb(y)) / 2; nb_spaces++)
+		{
+			ft_putchar(' ');
+		}
 		ft_printf("%i", y);
-		for (int nb_spaces = 0; nb_spaces < nb_col_size - ft_get_size_nb(y); nb_spaces++)
+		for (int nb_spaces = 0; nb_spaces < (nb_col_size - ft_get_size_nb(y)) / 2; nb_spaces++)
 		{
 			ft_putchar(' ');
 		}
 	}
-	
+
 	ft_printf("\n\n");
 }

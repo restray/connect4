@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:33:09 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 22:55:16 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/11 23:36:02 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int main(int argc, char **argv)
                 ft_display_grid(&setup, first_player, 0);
                 int column = -2;
                 do {
-                    if (column == -1)
+                    if (column == -1 || column >= setup.columns)
                         ft_printf("Column should be between %i and %i\n", 0, setup.columns - 1);
                     else if (column >= 0)
                         ft_printf("This column is full!\n");
@@ -65,7 +65,7 @@ int main(int argc, char **argv)
                         exit = 1;
                         break;
                     }
-                } while (!(column >= 0 && column < setup.columns) || ft_is_column_fullfilled(&setup, column));
+                } while (!(column >= 0 && column < setup.columns && !ft_is_column_fullfilled(&setup, column)));
                 if (exit == 1)
                     break;
 
