@@ -7,35 +7,43 @@ LIB_FLAGS		= -L./libft
 
 RM	=	rm -rf
 
-HEADER			=	-Iincludes/ -Ilibft/includes/ -Ilibft/libft/
+INC			=	-Iincludes/ -Ilibft/includes/ -Ilibft/libft/
 INCLUDE_LIB		= ./libft/libftprintf.a
-VALGRIND 		= -O0 -g
+DEBUG 		= -O0 -g3
 
-SRCS = srcs/connect4.c srcs/grid.c srcs/utils.c
+SRCS = 	connect4.c \
+		grid.c \
+		utils.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(addprefix $(OBJS_PATH), $(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)
+SRCS_PATH = ./srcs/
+OBJS_PATH = ./objs/
 
-%.o: %.c
-		${CC} $(HEADER) ${CFLAGS} -c $< -o $@ $(VALGRIND)
+$(OBJS_PATH)%.o: $(SRCS_PATH)%.c
+		@mkdir -p $(dir $@)
+		${CC} $(INC) ${CFLAGS} -c $< -o $@ $(DEBUG)
 
 all : $(NAME)
 
-$(NAME) : $(OBJS)
-	$(MAKE) -C ./libft
-	$(CC) $(CFLAGS) $(HEADER) -o $(NAME) $(OBJS) $(INCLUDE_LIB) $(VALGRIND)
+$(NAME) : $(OBJS) $(INCLUDE_LIB)
+	$(CC) $(CFLAGS) $(INC) -o $(NAME) $(OBJS) $(INCLUDE_LIB) $(DEBUG)
 	echo "The $(NAME) has been build !"
+
+$(INCLUDE_LIB):
+	$(MAKE) -C ./libft
 
 clean :
 	$(MAKE) clean -C ./libft
-	$(RM) $(OBJS)
+	$(RM) $(OBJS_PATH)
 
 fclean : clean
 	$(MAKE) fclean -C ./libft
 	$(RM) $(NAME)
 	echo "The $(NAME) has been deleted !"
 
-re : fclean all
+re : fclean 
+	$(MAKE) all
 
 -include $(DEPS)
 .PHONY: all clean fclean re
