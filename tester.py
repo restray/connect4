@@ -26,7 +26,7 @@ def main(size_line: int, size_column: int):
         print(test_cases[0:20])
         return False
     else:
-        if "IA won" not in process.stdout:
+        if "Player won" in process.stdout:
             nb_time_prompt = process.stdout.count('>')
             print(process.stdout[process.stdout.rindex("\033[1;1H\033[2J")+len("\033[1;1H\033[2J"):])
             print(test_cases[0:nb_time_prompt])
@@ -58,14 +58,14 @@ if __name__ == "__main__":
     test_fail = 0
 
     print("Start simulation on 6 x 7")
-    for i in progressbar(range(10000), "Running tests 6x7: ", 40):
+    for i in progressbar(range(20000), "Running tests 6x7: ", 40):
         test_it += 1
         if not main(6, 7):
             test_fail += 1
 
-    # print("Start simulation on 10 x 10")
-    # for i in progressbar(range(10000), "Running tests 10x10: ", 40):
-    #     test_it += 1
-    #     if not main(10, 10):
-    #         test_fail += 1
+    print("Start simulation on 10 x 10")
+    for i in progressbar(range(20000), "Running tests 10x10: ", 40):
+        test_it += 1
+        if not main(10, 10):
+            test_fail += 1
     print("tests: {} | success: {} | fail: {} | fail rate: {}%".format(test_it, test_it - test_fail, test_fail, (100 * test_fail) / test_it))

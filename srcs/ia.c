@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 09:29:16 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/12 21:59:20 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/12 22:12:49 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static int ft_has_impact(t_connect4 *setup, int column, int tries)
 	{
 		setup->grid[line][column] = CELL_EMPTY;
 		column = ft_can_win_in_round(setup, tries, CELL_IA, column + 1);
-		ft_printf("%d\n", column);
+		if (column == -1)
+			return (-1);
 		line = ft_add_pawn(setup, column, CELL_IA);
 	}
 	setup->grid[line][column] = CELL_EMPTY;
@@ -60,33 +61,37 @@ int ft_ia_compute(t_connect4 *setup)
 {
 	int column;
 
-	ft_printf("1\n");
 	column = ft_can_win_in_round(setup, 1, CELL_IA, 0);
 	if (column >= 0)
 		return column;
 
-	ft_printf("2\n");
 	column = ft_can_win_in_round(setup, 1, CELL_PLAYER, 0);
 	if (column >= 0)
 		return column;
 
-	ft_printf("3\n");
+	column = ft_can_win_in_round(setup, 2, CELL_IA, 0);
+	if (column >= 0 && (column = ft_has_impact(setup, column, 2)) < setup->columns && column >= 0)
+		return column;
+		
 	column = ft_can_win_in_round(setup, 2, CELL_PLAYER, 0);
 	if (column >= 0 && (column = ft_has_impact(setup, column, 2)) < setup->columns && column >= 0)
 		return column;
 
-	ft_printf("4\n");
-	column = ft_can_win_in_round(setup, 2, CELL_IA, 0);
-	if (column >= 0 && (column = ft_has_impact(setup, column, 2)) < setup->columns && column >= 0)
-		return column;
-
-	ft_printf("5\n");
 	column = ft_can_win_in_round(setup, 3, CELL_IA, 0);
 	if (column >= 0 && (column = ft_has_impact(setup, column, 3)) < setup->columns && column >= 0)
 		return column;
 
-	ft_printf("6\n");
+	if (setup->last_column_played == -1)
+		return setup->columns / 2;
 
+	for (int i = 0; i < setup->columns; i++)
+	{
+		if (!ft_is_column_fullfilled(setup, i)) {
+			column = ft_has_impact(setup, i, 1);
+			if (column >= 0 && column < setup->columns)
+				return column;
+		}
+	}
 	return setup->columns / 2;
 }
 
