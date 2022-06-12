@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:35:31 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/12 18:50:33 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/12 18:53:58 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define MIN_LINES 6
 # define MAX_LINES 1000
 # define MIN_COLUMNS 7
-# define MAX_COLUMNS 100
+# define MAX_COLUMNS 1000
 # include <stdbool.h>
 # include "libftprintf.h"
 # include "libft.h"
