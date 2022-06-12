@@ -31,7 +31,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(INC) -o $(NAME) $(OBJS) $(LIBFT) $(DEBUG)
-	echo "The $(NAME) has been build !"
+	echo "$(NAME) has been built!"
 
 $(LIBFT):
 	$(MAKE) -C ./libft
@@ -43,7 +43,7 @@ clean:
 fclean: clean
 	$(MAKE) fclean -C ./libft
 	$(RM) $(NAME)
-	echo "The $(NAME) has been deleted !"
+	echo "$(NAME) has been deleted!"
 
 re: fclean 
 	$(MAKE) all
