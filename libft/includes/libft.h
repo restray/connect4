@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aweaver <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 11:10:46 by aweaver           #+#    #+#             */
-/*   Updated: 2022/06/12 14:26:56 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/06/12 15:54:44 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_list
 #  define BPINK "\33[1;35m"
 #  define BTEAL "\33[1;36m"
 #  define BWHITE "\33[1;97m"
-#  define CNOCOLOUR "\33[0m"
+#  define NOCOLOUR "\33[0m"
 # endif
 
 # ifndef FT_ABS

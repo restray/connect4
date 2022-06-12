@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:35:31 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/12 14:25:16 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/06/12 15:54:53 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define CELL_CHAR_IA "🟡"
 # define CELL_CHAR_EMPTY "  "
 
-# define NOCOLOUR() (ft_printf("\33[m"))
+# define SET_NOCOLOUR() (ft_printf("\33[m"))
 
 #define IA 0
 #define PLAYER 1

@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 22:04:42 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/12 15:50:32 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/06/12 15:55:08 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void ft_deallocate_grid(t_connect4 *setup)
 
 static void ft_get_color_winner(int round, int winner)
 {
-	NOCOLOUR();
+	SET_NOCOLOUR();
 	ft_printf("%s", GREY);
 	if (winner == 2)
 		ft_printf("%s", ((round == 0) ? YELLOW : RED));
@@ -72,22 +72,22 @@ void ft_display_grid(t_connect4 *setup, int winner)
 		else
 			ft_printf("%s", GRID_TOP_BOTTOM);
 	}
-	NOCOLOUR();
+	SET_NOCOLOUR();
 	for (int i = setup->lines - 1; i >= 0; i--)
 	{
 		int bg_i = i % 2;
-		NOCOLOUR();
+		SET_NOCOLOUR();
 		ft_putchar('\n');
 		// ///////////////////
 		ft_get_color_winner(setup->first_player, winner);
 		ft_printf("%s", GRID_LEFT_RIGHT);
-		NOCOLOUR();
+		SET_NOCOLOUR();
 		for (int y = 0; y < setup->columns; y++)
 		{
 			if (bg_i++ % 2 == 0)
 				ft_printf("%s", B_GREY);
 			else
-				NOCOLOUR();
+				SET_NOCOLOUR();
 			if (setup->grid[i][y] == CELL_EMPTY)
 				ft_printf("%s", CELL_CHAR_EMPTY);
 			else if (setup->grid[i][y] == CELL_IA)
@@ -98,10 +98,10 @@ void ft_display_grid(t_connect4 *setup, int winner)
 				ft_printf("Gone wrong... %i\n", setup->grid[i][y]);
 		}
 		// ///////////////////
-		NOCOLOUR();
+		SET_NOCOLOUR();
 		ft_get_color_winner(setup->first_player, winner);
 		ft_printf("%s", GRID_LEFT_RIGHT);
-		NOCOLOUR();
+		SET_NOCOLOUR();
 	}
 	ft_putchar('\n');
 	ft_get_color_winner(setup->first_player, winner);
@@ -115,7 +115,7 @@ void ft_display_grid(t_connect4 *setup, int winner)
 		else
 			ft_printf("%s", GRID_TOP_BOTTOM);
 	}
-	NOCOLOUR();
+	SET_NOCOLOUR();
 	//print numbers	
 	ft_putchar('\n');
 	ft_printf(" ");
