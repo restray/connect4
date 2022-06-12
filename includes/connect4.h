@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:35:31 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/12 21:08:12 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/12 22:32:54 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # define CLEAR "\033[1;1H\033[2J"
 # define CELL_CHAR_ENNEMY "🔴"
 # define CELL_CHAR_IA "🟡"
-#define CELL_CHAR_EMPTY "⚪"
+# define CELL_CHAR_EMPTY "  "
 
 # define SET_NOCOLOUR() (ft_printf("\33[m"))
 

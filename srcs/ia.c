@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 09:29:16 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/12 22:12:49 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/12 22:20:55 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ int ft_ia_compute(t_connect4 *setup)
 	if (setup->last_column_played == -1)
 		return setup->columns / 2;
 
-	for (int i = 0; i < setup->columns; i++)
+	for (int i = setup->columns / 2; i - setup->columns / 2 < setup->columns; i++)
 	{
-		if (!ft_is_column_fullfilled(setup, i)) {
-			column = ft_has_impact(setup, i, 1);
+		if (!ft_is_column_fullfilled(setup, i % setup->columns)) {
+			column = ft_has_impact(setup, i % setup->columns, 1);
 			if (column >= 0 && column < setup->columns)
 				return column;
 		}
