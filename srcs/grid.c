@@ -6,13 +6,13 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 22:04:42 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 23:46:14 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/12 14:56:33 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "connect4.h"
 
-int    ft_allocate_grid(t_connect4 *setup)
+int ft_allocate_grid(t_connect4 *setup)
 {
 	setup->grid = malloc(sizeof(int *) * (setup->lines + 1));
 	if (!(setup->grid))
@@ -38,7 +38,7 @@ int    ft_allocate_grid(t_connect4 *setup)
 	return (1);
 }
 
-void    ft_deallocate_grid(t_connect4 *setup)
+void ft_deallocate_grid(t_connect4 *setup)
 {
 	int i = 0;
 	while (i < setup->lines)
@@ -56,7 +56,7 @@ static void ft_get_color_winner(int round, int winner)
 		ft_printf("%s", ((round == 1) ? RED : YELLOW));
 }
 
-void    ft_display_grid(t_connect4 *setup, int winner)
+void ft_display_grid(t_connect4 *setup, int winner)
 {
 	ft_printf("%s", CLEAR);
 
@@ -99,7 +99,8 @@ void    ft_display_grid(t_connect4 *setup, int winner)
 				ft_printf("%s", ((setup->first_player == 0) ? CELL_CHAR_ENNEMY : CELL_CHAR_IA));
 			else
 				ft_printf("Gone wrong... %i\n", setup->grid[i][y]);
-			for (int nb_spaces = 0; nb_spaces < nb_col_size - 2; nb_spaces++) {
+			for (int nb_spaces = 0; nb_spaces < nb_col_size - 2; nb_spaces++)
+			{
 				ft_putchar(' ');
 			}
 		}
@@ -113,7 +114,7 @@ void    ft_display_grid(t_connect4 *setup, int winner)
 	ft_get_color_winner(setup->first_player, winner);
 	// ///////////////////
 	for (int y = 0; y < (setup->columns * 3) + 2; y++)
-	{		
+	{
 		if (y == 0)
 			ft_printf("%s", GRID_BOTTOM_LEFT);
 		else if (y == (setup->columns * 3) + 1)
@@ -122,17 +123,13 @@ void    ft_display_grid(t_connect4 *setup, int winner)
 			ft_printf("%s", GRID_TOP_BOTTOM);
 	}
 	NOCOLOUR();
-
+	
 	ft_putchar('\n');
 	ft_printf(" ");
 	for (int y = 0; y < setup->columns; y++)
 	{
-		for (int nb_spaces = 0; nb_spaces < (nb_col_size - ft_get_size_nb(y)) / 2; nb_spaces++)
-		{
-			ft_putchar(' ');
-		}
 		ft_printf("%i", y);
-		for (int nb_spaces = 0; nb_spaces < (nb_col_size - ft_get_size_nb(y)) / 2; nb_spaces++)
+		for (int nb_spaces = 0; nb_spaces < nb_col_size - ft_get_size_nb(y); nb_spaces++)
 		{
 			ft_putchar(' ');
 		}
