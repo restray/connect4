@@ -19,20 +19,24 @@ def generate_random_numbers(size_line: int, size_column: int) -> int :
 def main(size_line: int, size_column: int):
     test_cases = generate_random_numbers(size_line, size_column)
 
-    process = subprocess.run(["./connect4", "{}".format(size_line), "{}".format(size_column)],
-                             capture_output=True, universal_newlines=True, input="\n".join(str(x) for x in test_cases))
-    
-    if "IA won" not in process.stdout:
-        nb_time_prompt = process.stdout.count('>')
-        print(process.stdout[process.stdout.rindex("\033[1;1H\033[2J")+len("\033[1;1H\033[2J"):])
-        print(test_cases[0:nb_time_prompt])
-        process.stdout = process.stdout.replace("> ", "> \n")
-        with open(datetime.now().strftime("error_grid_{}_{}_%H_%M_%d_%m_%Y-%f.log".format(size_line, size_column)), "w") as f:
-            f.write(escape_ansi(process.stdout))
-            f.write("{}".format(test_cases[0:nb_time_prompt]))
-            f.close()
+    try:
+        process = subprocess.run(["./connect4", "{}".format(size_line), "{}".format(size_column)],
+                                capture_output=True, universal_newlines=True, input="\n".join(str(x) for x in test_cases), timeout=5)
+    except subprocess.TimeoutExpired:
+        print(test_cases[0:20])
         return False
-    return True
+    else:
+        if "IA won" not in process.stdout:
+            nb_time_prompt = process.stdout.count('>')
+            print(process.stdout[process.stdout.rindex("\033[1;1H\033[2J")+len("\033[1;1H\033[2J"):])
+            print(test_cases[0:nb_time_prompt])
+            process.stdout = process.stdout.replace("> ", "> \n")
+            with open(datetime.now().strftime("error_grid_{}_{}_%H_%M_%d_%m_%Y-%f.log".format(size_line, size_column)), "w") as f:
+                f.write(escape_ansi(process.stdout))
+                f.write("{}".format(test_cases[0:nb_time_prompt]))
+                f.close()
+            return False
+        return True
 
 
 def progressbar(it, prefix="", size=60, out=sys.stdout):
@@ -58,11 +62,10 @@ if __name__ == "__main__":
         test_it += 1
         if not main(6, 7):
             test_fail += 1
-       
 
-    print("Start simulation on 10 x 10")
-    for i in progressbar(range(10000), "Running tests 10x10: ", 40):
-        test_it += 1
-        if not main(10, 10):
-            test_fail += 1
+    # print("Start simulation on 10 x 10")
+    # for i in progressbar(range(10000), "Running tests 10x10: ", 40):
+    #     test_it += 1
+    #     if not main(10, 10):
+    #         test_fail += 1
     print("tests: {} | success: {} | fail: {} | fail rate: {}%".format(test_it, test_it - test_fail, test_fail, (100 * test_fail) / test_it))
