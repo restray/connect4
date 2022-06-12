@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 09:29:16 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/12 17:51:16 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/12 18:09:37 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,21 @@ int ft_ia_compute(t_connect4 *setup)
 				while (column_player >= 0) {
 					column_player = ft_can_win_in_round(setup, 1, CELL_IA, column_player + 1);
 					if (column_player == setup->columns)
+					{
+						setup->grid[line][column] = CELL_EMPTY;
 						return column_player;
+					}
 				}
 				setup->grid[line][column] = CELL_EMPTY;
 				return column;
 			}
 		}
 
-		column = ft_can_win_in_round(setup, 1, CELL_PLAYER, 0);
-		if (column >= 0)
-			return column;
+		if (i <= 2) {
+			column = ft_can_win_in_round(setup, i, CELL_PLAYER, 0);
+			if (column >= 0)
+				return column;
+		}
 	}
 
 	if (setup->last_column_played != -1) {

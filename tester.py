@@ -1,8 +1,8 @@
+import sys
+import time
 from datetime import datetime
 import random, re
 import subprocess
-from time import sleep
-
 
 def escape_ansi(line):
     ansi_escape = re.compile(r'(?:\x1B[@-_]|[\x80-\x9F])[0-?]*[ -/]*[@-~]')
@@ -34,15 +34,35 @@ def main(size_line: int, size_column: int):
         return False
     return True
 
+
+def progressbar(it, prefix="", size=60, out=sys.stdout):
+    count = len(it)
+
+    def show(j):
+        x = int(size*j/count)
+        print("{}[{}{}] {}/{}".format(prefix, u"█"*x, "."*(size-x), j, count),
+              end='\r', file=out, flush=True)
+    show(0)
+    for i, item in enumerate(it):
+        yield item
+        show(i+1)
+    print("\n", flush=True, file=out)
+
+
 if __name__ == "__main__":
+    test_it = 0
+    test_fail = 0
+
     print("Start simulation on 6 x 7")
-    i = 0
-    while i < 500:
-        main(6, 7)
-        i += 1
+    for i in progressbar(range(10000), "Running tests: ", 40):
+        test_it += 1
+        if not main(6, 7):
+            test_fail += 1
+       
 
     print("Start simulation on 10 x 10")
-    i = 0
-    while i < 500:
-        main(10, 10)
-        i += 1
+    for i in progressbar(range(10000), "Running tests: ", 40):
+        test_it += 1
+        if not main(10, 10):
+            test_fail += 1
+    print("tests: {} | success: {} | fail: {} | fail rate: {}%".format(test_it, test_it - test_fail, test_fail, (100 * test_fail) / test_it))
