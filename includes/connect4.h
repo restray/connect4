@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:35:31 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 23:45:51 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/12 14:25:16 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # define MIN_LINES 6
 # define MIN_COLUMNS 7
 # include <stdbool.h>
-# include "ft_printf.h"
+# include "libftprintf.h"
+# include "libft.h"
 
 # define CELL_PLAYER 2
 # define CELL_IA 1
@@ -31,10 +32,15 @@
 # define GRID_BOTTOM_LEFT "┗"
 # define GRID_BOTTOM_RIGHT "┛"
 
+# ifndef FT_COLOURS
+#  define FT_COLOURS
+
+#  define RED "\33[1;31m"
+#  define YELLOW "\33[1;33m"
+#  define GREY "\33[1;90m"
+
+# endif
 # define B_GREY "\33[0;100m"
-# define RED "\33[1;31m"
-# define YELLOW "\33[1;33m"
-# define GREY "\33[1;90m"
 # define CLEAR "\033[1;1H\033[2J"
 # define CELL_CHAR_ENNEMY "🔴"
 # define CELL_CHAR_IA "🟡"

@@ -1,5 +1,9 @@
+libft.a
+test*
+*.swp
+*.swo
+main*
 *.o
-main.c
-libftprintf.a
-pft/
-tester/
+*.d
+a.out
+libft.so
