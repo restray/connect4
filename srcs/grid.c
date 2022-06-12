@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 22:04:42 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/12 15:55:08 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/12 15:57:19 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void ft_display_grid(t_connect4 *setup, int winner)
 	//print numbers	
 	ft_putchar('\n');
 	ft_printf(" ");
-	if (setup->columns > 9)
+	if (setup->columns > 10)
 	{
 		for (int y = 0; y < setup->columns; y++)
 		{
