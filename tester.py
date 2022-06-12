@@ -9,31 +9,36 @@ def escape_ansi(line):
 
 def generate_random_numbers(size_line: int, size_column: int) -> int :
     test_cases = []
-
     for i in range(size_line * size_column):
         input_nb = random.randint(0, size_column)
         test_cases.append(input_nb)
+    return test_cases
 
-def main():
-    test_cases = []
 
-    for i in range(10 * 10):
-        input_nb = random.randint(0, 9)
-        test_cases.append(input_nb)
+def main(size_line: int, size_column: int):
+    test_cases = generate_random_numbers(size_line, size_column)
 
-    process = subprocess.run(["./connect4", "10", "10"],
+    process = subprocess.run(["./connect4", "{}".format(size_line), "{}".format(size_column)],
                              capture_output=True, universal_newlines=True, input="\n".join(str(x) for x in test_cases))
     
     if "IA won" not in process.stdout:
         nb_time_prompt = process.stdout.count('>')
-        print(process.stdout)
+        print(process.stdout[process.stdout.rindex("\033[1;1H\033[2J")+len("\033[1;1H\033[2J"):])
         print(test_cases[0:nb_time_prompt])
         return False
     return True
 
 if __name__ == "__main__":
-    print("Start simulation")
+    print("Start simulation on 6 x 7")
     i = 0
-    while main():
-        print("Simulation {}".format(i))
+    while main(6, 7) and i < 500:
         i += 1
+    if i == 500:
+        print("Well done, no issue for this!")
+
+    print("Start simulation on 10 x 10")
+    i = 0
+    while main(10, 10) and i < 500:
+        i += 1
+    if i == 500:
+        print("Well done, no issue for this!")
