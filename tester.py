@@ -1,3 +1,4 @@
+from datetime import datetime
 import random, re
 import subprocess
 from time import sleep
@@ -10,7 +11,7 @@ def escape_ansi(line):
 def generate_random_numbers(size_line: int, size_column: int) -> int :
     test_cases = []
     for i in range(size_line * size_column):
-        input_nb = random.randint(0, size_column)
+        input_nb = random.randint(0, size_column - 1)
         test_cases.append(input_nb)
     return test_cases
 
@@ -25,6 +26,11 @@ def main(size_line: int, size_column: int):
         nb_time_prompt = process.stdout.count('>')
         print(process.stdout[process.stdout.rindex("\033[1;1H\033[2J")+len("\033[1;1H\033[2J"):])
         print(test_cases[0:nb_time_prompt])
+        process.stdout = process.stdout.replace("> ", "> \n")
+        with open(datetime.now().strftime('error_%H_%M_%d_%m_%Y-%f.log'), "w") as f:
+            f.write(escape_ansi(process.stdout))
+            f.write("{}".format(test_cases[0:nb_time_prompt]))
+            f.close()
         return False
     return True
 
@@ -35,6 +41,8 @@ if __name__ == "__main__":
         i += 1
     if i == 500:
         print("Well done, no issue for this!")
+    else:
+        print("Fail on {}".format(i))
 
     print("Start simulation on 10 x 10")
     i = 0
@@ -42,3 +50,5 @@ if __name__ == "__main__":
         i += 1
     if i == 500:
         print("Well done, no issue for this!")
+    else:
+        print("Fail on {}".format(i))

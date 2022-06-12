@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 09:29:16 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 19:46:13 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/12 17:51:16 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,14 @@ int ft_ia_compute(t_connect4 *setup)
 			return column;
 	}
 
-	return rand() % setup->columns;
+	if (setup->last_column_played != -1) {
+		if (setup->last_column_played == setup->columns - 1) {
+			return setup->last_column_played - 1;
+		} else {
+			return setup->last_column_played + 1;
+		}
+	}
+	return setup->columns / 2;
 }
 
 int ft_ia_play(t_connect4 *setup)

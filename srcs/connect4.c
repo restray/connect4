@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:33:09 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/11 23:47:40 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/12 17:35:16 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int main(int argc, char **argv)
 
     setup.lines = ft_atoi_err(argv[1]);
     setup.columns = ft_atoi_err(argv[2]);
+    setup.last_column_played = -1;
     if (!(setup.lines >= MIN_LINES && setup.columns >= MIN_COLUMNS))
         return ft_display_help_text();
 
@@ -43,7 +44,10 @@ int main(int argc, char **argv)
         while (!ft_is_party_finished(&setup))
         {
             if (round % 2 == IA)
-                ft_add_pawn(&setup, ft_ia_play(&setup), CELL_IA);
+            {
+                setup.last_column_played = ft_ia_play(&setup);
+                ft_add_pawn(&setup, setup.last_column_played, CELL_IA);
+            }
             else
             {
                 ft_display_grid(&setup, 0);
@@ -62,7 +66,7 @@ int main(int argc, char **argv)
                 } while (!(column >= 0 && column < setup.columns && !ft_is_column_fullfilled(&setup, column)));
                 if (exit == 1)
                     break;
-
+                setup.last_column_played = column;
                 ft_add_pawn(&setup, column, CELL_PLAYER);
             }
             round++;

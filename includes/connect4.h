@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:35:31 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/12 15:54:53 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/12 17:34:13 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct	s_connect4 {
 	int         columns;
 	int			first_player; /* PLAYER = 1 ; IA = 0 */
 	int**       grid;
+	int			last_column_played;
 }               t_connect4;
 
 int		ft_get_size_nb(int nb);
