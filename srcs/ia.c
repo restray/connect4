@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 09:29:16 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/12 18:45:30 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/12 19:29:10 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int ft_ia_compute(t_connect4 *setup)
 
 	for (int i = 1; i <= 3; i++) {
 		// On essaye de voir si en 2 coup le joueur peut gagner
-		if (i == 2)
+		if (i >= 2)
 		{
 			// Si il gagne: on bloque sa possibilitée de victoire
-			column = ft_can_win_in_round(setup, 1, CELL_PLAYER, 0);
+			column = ft_can_win_in_round(setup, i, CELL_PLAYER, 0);
 			if (column >= 0)
 				return column;
 		}
@@ -59,23 +59,21 @@ int ft_ia_compute(t_connect4 *setup)
 			// Si elle peut gagner avec plus d'1 manche
 			else
 			{
-				// On ajoute le pion dans la colonne présentie
-				int line = ft_add_pawn(setup, column, CELL_IA);
-				// On essaye de voir si le joueur peut gagner en 1 coup
-				int column_player = ft_can_win_in_round(setup, 1, CELL_PLAYER, 0);
-				// Si le joueur peut gagner
-				while (column_player >= 0)
+				int line = 0;
+				int column_player = -1;
+				do
 				{
-					// On simule d'autres cas dans lesquels notre IA ne fait pas gagner le joueur
-					column_player = ft_can_win_in_round(setup, 1, CELL_IA, column_player + 1);
-					if (column_player == setup->columns - 1)
-					{
-						// On retire le pion placé à la ligne 54
+					// On ajoute le pion dans la colonne présentie
+					line = ft_add_pawn(setup, column, CELL_IA);
+					// Si le joueur gagne en 1 coup, on recommence
+					column_player = ft_can_win_in_round(setup, 1, CELL_PLAYER, 0);
+					if (column_player >= 0) {
 						setup->grid[line][column] = CELL_EMPTY;
-						return column_player;
+						column = ft_can_win_in_round(setup, i, CELL_IA, column + 1);
+						if (column == -1)
+							return column_player;
 					}
-				}
-				// On retire le pion placé à la ligne 54
+				} while (column_player >= 0);
 				setup->grid[line][column] = CELL_EMPTY;
 				return column;
 			}
