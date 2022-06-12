@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:33:09 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/12 18:54:12 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/12 19:30:44 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
     setup.lines = ft_atoi_err(argv[1]);
     setup.columns = ft_atoi_err(argv[2]);
     setup.last_column_played = -1;
-    if (!(setup.lines >= MIN_LINES && setup.lines <= MIN_LINES && setup.columns >= MIN_COLUMNS && setup.columns <= MAX_COLUMNS))
+    if (!(setup.lines >= MIN_LINES && setup.lines <= MAX_LINES && setup.columns >= MIN_COLUMNS && setup.columns <= MAX_COLUMNS))
         return ft_display_help_text();
 
     // Know if we can enter the game
