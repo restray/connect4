@@ -8,7 +8,7 @@ LIB_FLAGS		= -L./libft
 RM	=	rm -rf
 
 INC			=	-Iincludes/ -Ilibft/includes/ -Ilibft/libft/
-LIBFT		= ./libft/libftprintf.a
+LIBFT		= ./libft/libft.a
 DEBUG 		= -O0 -g3
 
 SRCS = 	connect4.c \
