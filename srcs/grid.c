@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 22:04:42 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/12 15:37:09 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/06/12 15:50:32 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,33 +116,39 @@ void ft_display_grid(t_connect4 *setup, int winner)
 			ft_printf("%s", GRID_TOP_BOTTOM);
 	}
 	NOCOLOUR();
-	
+	//print numbers	
 	ft_putchar('\n');
 	ft_printf(" ");
-	for (int y = 0; y < setup->columns; y++)
+	if (setup->columns > 9)
 	{
-		if (y % 2 == 0)
-			ft_printf("%2i", y);
-		if (y % 2 == 1)
+		for (int y = 0; y < setup->columns; y++)
 		{
-			if (y < 100)
-				ft_printf("%s", "  ");
-			else
-				ft_printf("%s", " ");
+			if (y % 2 == 0)
+				ft_printf("%2i", y);
+			if (y % 2 == 1)
+			{
+				if (y < 100)
+					ft_printf("%s", "  ");
+				else
+					ft_printf("%s", " ");
+			}
+		}
+		ft_printf("\n ");
+		for (int y = 0; y < setup->columns; y++)
+		{
+			if (y % 2 == 0)
+			{
+				if (y < 100)
+					ft_printf("%s", "  ");
+				else
+					ft_printf("%s", " ");
+			}
+			if (y % 2 == 1)
+				ft_printf("%2i", y);
 		}
 	}
-	ft_printf("\n ");
-	for (int y = 0; y < setup->columns; y++)
-	{
-		if (y % 2 == 0)
-		{
-			if (y < 100)
-				ft_printf("%s", "  ");
-			else
-				ft_printf("%s", " ");
-		}
-		if (y % 2 == 1)
+	else
+		for (int y = 0; y < setup->columns; y++)
 			ft_printf("%2i", y);
-	}
 	ft_printf("\n\n");
 }
