@@ -54,14 +54,14 @@ if __name__ == "__main__":
     test_fail = 0
 
     print("Start simulation on 6 x 7")
-    for i in progressbar(range(10000), "Running tests: ", 40):
+    for i in progressbar(range(10000), "Running tests 6x7: ", 40):
         test_it += 1
         if not main(6, 7):
             test_fail += 1
        
 
     print("Start simulation on 10 x 10")
-    for i in progressbar(range(10000), "Running tests: ", 40):
+    for i in progressbar(range(10000), "Running tests 10x10: ", 40):
         test_it += 1
         if not main(10, 10):
             test_fail += 1

@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:35:31 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/12 17:34:13 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/12 18:50:33 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 #ifndef CONNECT4_H
 # define CONNECT4_H
 # define MIN_LINES 6
+# define MAX_LINES 1000
 # define MIN_COLUMNS 7
+# define MAX_COLUMNS 100
 # include <stdbool.h>
 # include "libftprintf.h"
 # include "libft.h"

@@ -6,7 +6,7 @@
 /*   By: tbelhomm <tbelhomm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 21:33:09 by tbelhomm          #+#    #+#             */
-/*   Updated: 2022/06/12 17:35:16 by tbelhomm         ###   ########.fr       */
+/*   Updated: 2022/06/12 18:50:23 by tbelhomm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int ft_display_help_text(void)
     ft_printf("Welcome on connect 4 (or LE PUISSANCE 4 in good old French).\n");
     ft_printf("You seem lost. Can I help you? Here is the help guide son:\n");
     ft_printf("\n./connect4 [lines] [columns]\n\n");
-    ft_printf("Lines should be at least %i\n", MIN_LINES);
-    ft_printf("Columns should be at least %i\n", MIN_COLUMNS);
+    ft_printf("Lines should be at least %i and less than %i\n", MIN_LINES, MAX_LINES);
+    ft_printf("Columns should be at least %i and less than %i\n", MIN_COLUMNS, MAX_COLUMNS);
 
     return (1);
 }
@@ -31,15 +31,17 @@ int main(int argc, char **argv)
     if (argc != 3)
         return ft_display_help_text();
 
+    // Check params in
+    srand(time(0));
     setup.lines = ft_atoi_err(argv[1]);
     setup.columns = ft_atoi_err(argv[2]);
     setup.last_column_played = -1;
-    if (!(setup.lines >= MIN_LINES && setup.columns >= MIN_COLUMNS))
+    if (!(setup.lines >= MIN_LINES && setup.columns >= MIN_COLUMNS && setup.columns <= MAX_COLUMNS))
         return ft_display_help_text();
 
+    // Know if we can enter the game
     if (ft_allocate_grid(&setup))
     {
-        srand(time(0));
         int round = setup.first_player = ft_get_first_player();
         while (!ft_is_party_finished(&setup))
         {
